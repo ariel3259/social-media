@@ -1,0 +1,9 @@
+.login-container{
+    background-color: #8DC6FF;
+    grid-column: 5/9;
+    grid-row: 3/10;
+    border-radius:15px;
+    padding: 25px;
+    display: flex;
+    flex-wrap: warp;
+}
