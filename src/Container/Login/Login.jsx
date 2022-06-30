@@ -17,16 +17,18 @@ export const Login = () => {
             username: user.username,
             password: user.password
         });
-        const response = await fetch("https://api-social-media-1.herokuapp.com/login", {
+        const request = await fetch("https://api-social-media-1.herokuapp.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: data
         });
-        const {token} = await response.json();
-        if(token !== "BAD_CREDENTIALS" || token !== "DISABLED_EXCEPTION") 
-            localStorage.setItem("authorization", token);
+        const response = await request.json();
+        if(request.status < 400) {
+            localStorage.setItem("authorization", response.token);
+            localStorage.setItem("idUser", response.idUser);
+        }
         
     }
     
