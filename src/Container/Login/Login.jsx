@@ -2,7 +2,7 @@ import { useReducer } from "react"
 import { UsersReducer, initialState } from "../../Reducers/usersReducers";
 import {GridContainer} from "../../Components/GridContainer/GridContainer";
 import * as userActions from "../../Actions/UsersAction";
-import "./login.css";
+import "./loginAndRegister.css";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
@@ -25,8 +25,8 @@ export const Login = () => {
             body: data
         });
         const {token} = await response.json();
-        console.log(response.status);
-        console.log(token);
+        if(token !== "BAD_CREDENTIALS" || token !== "DISABLED_EXCEPTION") 
+            localStorage.setItem("authorization", token);
         
     }
     
@@ -47,14 +47,12 @@ export const Login = () => {
                             <label>Username</label>
                             <input 
                                 type="text" 
-                                className="username-login"
                                 onChange={onChangeUsername} />
                         </div>
                         <div className="field">
                             <label>Password</label>
                             <input 
-                                type="text"
-                                className="password-login"
+                                type="password"
                                 onChange={onChangePassword} />
                         </div>
                         <div className="field">
