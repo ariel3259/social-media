@@ -11,15 +11,35 @@ export const Login = () => {
 
     const onChangeUsername = (e) => dispatch(userActions.actionChangeUsername(e.target.value));
     const onChangePassword = (e) => dispatch(userActions.actionChangePassword(e.target.value));
-
+    const onSubmitLogin = async (e) => {
+        e.preventDefault();
+        const data = JSON.stringify({
+            username: user.username,
+            password: user.password
+        });
+        const response = await fetch("https://api-social-media-1.herokuapp.com/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: data
+        });
+        const {token} = await response.json();
+        console.log(response.status);
+        console.log(token);
+        
+    }
+    
     return (
         <>
             <GridContainer 
-                row="12"
-                column="12"
+                row={12}
+                column={12}
                 height={100}
                 bg="#01386C">
-                    <div className="login-container">
+                    <form 
+                        className="login-container"
+                        onSubmit={onSubmitLogin}>
                         <div className="field">
                             <h1>Log in</h1>
                         </div>
@@ -38,14 +58,14 @@ export const Login = () => {
                                 onChange={onChangePassword} />
                         </div>
                         <div className="field">
-                            <a className="btn-login">
+                            <button className="btn-login" type="submit">
                                 Login
-                            </a>
+                            </button>
                             <Link to="/register" className="btn-register">
                                 Register
                             </Link>
                         </div>
-                    </div>
+                    </form>
             </GridContainer>
         </>
     )
