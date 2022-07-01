@@ -1,16 +1,18 @@
 import { useReducer } from "react"
 import { UsersReducer, initialState } from "../../Reducers/usersReducers";
-import {GridContainer} from "../../Components/GridContainer/GridContainer";
-import * as userActions from "../../Actions/UsersAction";
+import { GridContainer } from "../../Components/GridContainer/GridContainer";
+import { actionChangeUsername, actionChangePassword } from "../../Actions/UsersAction";
 import "./loginAndRegister.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
 
     const [user, dispatch] = useReducer(UsersReducer, initialState);
+    const navigate = useNavigate();
 
-    const onChangeUsername = (e) => dispatch(userActions.actionChangeUsername(e.target.value));
-    const onChangePassword = (e) => dispatch(userActions.actionChangePassword(e.target.value));
+    const onChangeUsername = (e) => dispatch(actionChangeUsername(e.target.value));
+    const onChangePassword = (e) => dispatch(actionChangePassword(e.target.value));
     const onSubmitLogin = async (e) => {
         e.preventDefault();
         const data = JSON.stringify({
@@ -28,6 +30,7 @@ export const Login = () => {
         if(request.status < 400) {
             localStorage.setItem("authorization", response.token);
             localStorage.setItem("idUser", response.idUser);
+            navigate("/post");
         }
         
     }
