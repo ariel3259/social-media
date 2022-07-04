@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-
+import "./cardPost.css";
+  
 export const CardPost = ({title, body, username, id}) => {
 
     return(
@@ -9,7 +10,7 @@ export const CardPost = ({title, body, username, id}) => {
             <h3 className="username">
                 <Link 
                     to={`/profile/${id}`} 
-                    style={{textDecoration:"none"}}>
+                    style={{textDecoration:"none", color:"black"}}>
                     {username}
                 </Link>
             </h3>

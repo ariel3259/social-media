@@ -5,6 +5,7 @@ import { actionChangeUsername, actionChangePassword } from "../../Actions/UsersA
 import "./loginAndRegister.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Field } from "../../Components/Field/Field";
 
 export const Login = () => {
 
@@ -48,18 +49,14 @@ export const Login = () => {
                         <div className="field">
                             <h1>Log in</h1>
                         </div>
-                        <div className="field">
-                            <label>Username</label>
-                            <input 
-                                type="text" 
-                                onChange={onChangeUsername} />
-                        </div>
-                        <div className="field">
-                            <label>Password</label>
-                            <input 
-                                type="password"
-                                onChange={onChangePassword} />
-                        </div>
+                        <Field 
+                            name="Username"
+                            type="text"
+                            event={onChangeUsername}/>
+                        <Field 
+                            name="Password"
+                            type="password"
+                            event={onChangePassword}/>
                         <div className="field">
                             <button className="btn-login" type="submit">
                                 Login

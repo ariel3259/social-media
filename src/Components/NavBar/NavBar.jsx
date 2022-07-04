@@ -1,7 +1,7 @@
 import "./navbar.css";
 import {Link, useNavigate} from "react-router-dom"
 
-export const NavBar = () => {
+export const NavBar = (props) => {
     const navigate = useNavigate();
     const idUser = localStorage.getItem("idUser");
     const logout = () => {
@@ -30,7 +30,12 @@ export const NavBar = () => {
                         Profile
                     </Link>
                     </li>
-                <li onClick={logout}>Logout</li>
+                <li 
+                    onClick={logout}
+                    style={{cursor:"pointer"}}>
+                        Logout
+                </li>
+                {props.children}
             </ul>
         </nav>
     )
