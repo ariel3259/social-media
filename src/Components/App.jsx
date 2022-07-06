@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Login } from "../Container/Login/Login";
 import { Register } from "../Container/Register/Register";
 import { Post } from "../Container/Post/Post";
+import { Profile } from "../Container/Profile/Profile";
 
 function App() {
 
@@ -17,6 +18,9 @@ function App() {
         <Route 
           path="/post"
           element={<Post />} />
+        <Route 
+          path="/profile/:idUser"
+          element={<Profile />}/>
       </Routes>
     </BrowserRouter>
   )

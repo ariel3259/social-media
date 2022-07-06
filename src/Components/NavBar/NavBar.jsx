@@ -3,17 +3,19 @@ import {Link, useNavigate} from "react-router-dom"
 
 export const NavBar = (props) => {
     const navigate = useNavigate();
+    const username = localStorage.getItem("username");
     const idUser = localStorage.getItem("idUser");
     const logout = () => {
         localStorage.removeItem("idUser");
         localStorage.removeItem("authorization");
+        localStorage.removeItem("username");
         navigate("/");
     }
 
     return(
         <nav>
             <ul>
-                <li>Username</li>
+                <li>{username}</li>
                 <li>
                     <Link 
                         to="/post"
@@ -21,7 +23,9 @@ export const NavBar = (props) => {
                             Home
                     </Link>
                     </li>
-                <li>View my posts</li>
+                <li>
+                        View my posts
+                </li>
                 <li>View my comments</li>
                 <li>
                     <Link 

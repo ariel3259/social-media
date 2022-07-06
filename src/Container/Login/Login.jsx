@@ -29,7 +29,8 @@ export const Login = () => {
         });
         const response = await request.json();
         if(request.status < 400) {
-            localStorage.setItem("authorization", response.token);
+            localStorage.setItem("authorization", "Bearer " + response.token);
+            localStorage.setItem("username", user.username);
             localStorage.setItem("idUser", response.idUser);
             navigate("/post");
         }
