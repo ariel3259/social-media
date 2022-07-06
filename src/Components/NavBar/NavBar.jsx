@@ -24,7 +24,11 @@ export const NavBar = (props) => {
                     </Link>
                     </li>
                 <li>
-                        View my posts
+                    <Link
+                        to={`/post/${username}`}
+                        style={{textDecoration:"none", color:"black"}}>
+                            View my posts
+                    </Link>
                 </li>
                 <li>View my comments</li>
                 <li>

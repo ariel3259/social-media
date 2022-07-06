@@ -3,6 +3,7 @@ import { Login } from "../Container/Login/Login";
 import { Register } from "../Container/Register/Register";
 import { Post } from "../Container/Post/Post";
 import { Profile } from "../Container/Profile/Profile";
+import { UserPosts } from "../Container/UserPosts/UserPosts";
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
         <Route 
           path="/profile/:idUser"
           element={<Profile />}/>
+        <Route 
+          path="/post/:username"
+          element={<UserPosts />}/>
       </Routes>
     </BrowserRouter>
   )

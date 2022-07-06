@@ -20,8 +20,8 @@ export const Post = () => {
     const [styleModal, setStyleModal] = useState("modal-close");
     const [post, dispatch] = useReducer(postReducer, initialState);
     const [index, setIndex] = useState(1);
-    const [posts, setPosts] = useState([]);  
-    const [loading, setLoading] = useState(true);  
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);    
     const navigate = useNavigate();
     
 
@@ -31,10 +31,8 @@ export const Post = () => {
     const onClickCloseModal = () => setStyleModal("modal-close");
     const onChangeTitle = (e) => dispatch(PostAction.actionChangeTitle(e.target.value));
     const onChangeBody = (e) => dispatch(PostAction.actionChangeBody(e.target.value));
-    const onChangeIndex = () => {
-        console.log(index);
-        setIndex((prevIndex) => prevIndex + 1)
-    };
+    const onChangeIndex = () => setIndex((prevIndex) => prevIndex + 1);
+    
     
     //get all posts
     const onChangePosts = async () => {
@@ -77,6 +75,13 @@ export const Post = () => {
         onChangePosts().then(() => console.log("posts loaded"));
     }, [index]);
  
+    const postRenderedList = posts.map(post => (
+        <CardPost 
+        title={post.title}
+        body={post.body}
+        username={post.user.username}
+        key={Math.random()}/>
+    ));
 
     return (
     <GridContainer
@@ -126,13 +131,7 @@ export const Post = () => {
             </div>
         </div>
         <div className="posts">
-            {posts.map(post => (
-                <CardPost 
-                title={post.title}
-                body={post.body}
-                username={post.user.username}
-                key={Math.random()}/>
-            ))}
+            {postRenderedList}
         </div>
         
     </GridContainer>);
