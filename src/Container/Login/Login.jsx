@@ -32,7 +32,7 @@ export const Login = () => {
             localStorage.setItem("authorization", "Bearer " + response.token);
             localStorage.setItem("username", user.username);
             localStorage.setItem("idUser", response.idUser);
-            navigate("/post");
+            navigate("/home");
         }
         
     }

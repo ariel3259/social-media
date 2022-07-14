@@ -18,7 +18,7 @@ export const NavBar = (props) => {
                 <li>{username}</li>
                 <li>
                     <Link 
-                        to="/post"
+                        to="/home"
                         style={{textDecoration:"none", color:"black"}}>
                             Home
                     </Link>
@@ -30,7 +30,6 @@ export const NavBar = (props) => {
                             View my posts
                     </Link>
                 </li>
-                <li>View my comments</li>
                 <li>
                     <Link 
                         to={`/profile/${idUser}`}

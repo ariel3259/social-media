@@ -3,6 +3,8 @@ import { NavBar } from "../../Components/NavBar/NavBar"
 
 export const UserPosts = () => {
 
+    
+
     return(
         <GridContainer
             row={12}
@@ -10,6 +12,7 @@ export const UserPosts = () => {
             bg="snow"
             height={100}>
             <NavBar />
+
         </GridContainer>
     )
 }

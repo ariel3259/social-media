@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { Login } from "../Container/Login/Login";
-import { Register } from "../Container/Register/Register";
-import { Post } from "../Container/Post/Post";
-import { Profile } from "../Container/Profile/Profile";
-import { UserPosts } from "../Container/UserPosts/UserPosts";
+import { Login } from "./Container/Login/Login";
+import { Register } from "./Container/Register/Register";
+import { Home } from "./Container/Home/Home";
+import { Profile } from "./Container/Profile/Profile";
+import { UserPosts } from "./Container/UserPosts/UserPosts";
 
 function App() {
 
@@ -17,8 +17,8 @@ function App() {
           path="/register"
           element={<Register />} />
         <Route 
-          path="/post"
-          element={<Post />} />
+          path="/home"
+          element={<Home />} />
         <Route 
           path="/profile/:idUser"
           element={<Profile />}/>

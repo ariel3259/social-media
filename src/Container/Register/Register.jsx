@@ -4,10 +4,12 @@ import { UsersReducer, initialState } from "../../Reducers/usersReducers";
 import * as userActions from "../../Actions/UsersAction";
 import { useReducer } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
 
     const [user, dispatch] = useReducer(UsersReducer, initialState);
+    const navigate = useNavigate();
 
     const onChangeName = (e) => dispatch(userActions.actionChangeName(e.target.value));
     const onChangeLastName = (e) => dispatch(userActions.actionChangeLastName(e.target.value));
@@ -24,7 +26,7 @@ export const Register = () => {
                 body: data
             });
             const response = await request.text();
-            console.log(response);
+            navigate("/");
     }   
 
 

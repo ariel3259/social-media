@@ -1,20 +1,18 @@
 import {GridContainer} from "../../Components/GridContainer/GridContainer";
 import { NavBar } from "../../Components/NavBar/NavBar";
-import "./post.css";
+import "./home.css";
 import { CardPost } from "../../Components/CardPost/CardPost";
 import { useState, useReducer, useEffect } from "react";
 import {Field} from "../../Components/Field/Field";
 import * as PostAction from "../../Actions/PostActions";
 import {postReducer, initialState} from "../../Reducers/PostReducers";
 import { useNavigate } from "react-router-dom";
-import InfiniteScroll from "react-infinite-scroll-component";
 
-export const Post = () => {
+export const Home = () => {
 
 
     const url = "https://api-social-media-1.herokuapp.com/api2/post";
     const token = localStorage.getItem("authorization");
-    const idUser = localStorage.getItem("idUser");
 
     //states
     const [styleModal, setStyleModal] = useState("modal-close");
@@ -46,11 +44,9 @@ export const Post = () => {
             navigate("/");
         }
         const response = await request.json();
-        if(index <= response.totalPage){
-            setPosts((prevPosts) => prevPosts.concat(response.posts));
-        } else{
-            setLoading(false);
-        }
+        if(index > response.totalPage) setLoading(false);
+        await setPosts(posts.concat(response.posts));
+        
     }
    
     //create a post
@@ -74,15 +70,27 @@ export const Post = () => {
         dispatch(PostAction.actionChangeIdUser(localStorage.getItem("idUser")));
         onChangePosts().then(() => console.log("posts loaded"));
     }, [index]);
- 
-    const postRenderedList = posts.map(post => (
+
+    const listPosts = posts?.map(post => (
         <CardPost 
-        title={post.title}
-        body={post.body}
-        username={post.user.username}
-        key={Math.random()}/>
+            title={post.title}
+            body={post.body}
+            id={post.user.id}
+            username={post.user.username}
+            key={post.id}/>
     ));
 
+    const getMorePosts = loading ?
+    <li
+        style={{cursor:"pointer"}}
+        onClick={onChangeIndex}>
+        Show more posts
+    </li> : 
+    <li 
+        style={{cursor:"default"}}>
+            There're no more posts
+    </li>;
+    
     return (
     <GridContainer
         row={12}
@@ -93,18 +101,7 @@ export const Post = () => {
             <li onClick={onClickShowModal}>
                 <label style={{cursor:"pointer"}}>Create Post</label>
             </li>
-                { 
-                    loading ?
-                    <li
-                        style={{cursor:"pointer"}}
-                        onClick={onChangeIndex}>
-                        Show more posts
-                    </li>: 
-                    <li 
-                        style={{cursor:"default"}}>
-                            There're no more posts
-                    </li>
-                }
+                {getMorePosts}
         </NavBar>
         <div className={styleModal} style={{transition:"all 0.2s !important"}}>
             <div className="modal-header">
@@ -131,7 +128,7 @@ export const Post = () => {
             </div>
         </div>
         <div className="posts">
-            {postRenderedList}
+            {listPosts}
         </div>
         
     </GridContainer>);

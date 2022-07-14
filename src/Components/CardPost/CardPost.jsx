@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./cardPost.css";
   
 export const CardPost = ({title, body, username, id}) => {
-
+    
     return(
         <div className="post">
             <h2 className="title">{title}</h2>
